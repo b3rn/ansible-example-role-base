@@ -2,7 +2,7 @@
 > A very simple role that handles base configuration across OS families.
 
 ## Role Variables
-### RHN Subscription
+### RHN Subscription ([docs](http://docs.ansible.com/ansible/redhat_subscription_module.html))
 *Note: use either `rhn_org_id` + `rhn_activationkey` or `rhn_username` + `rhn_password`*
 - `**rhn_rhsm_base_url**`: (optional) CDN baseurl
 - `**rhn_server_hostname**`: (optional) Red Hat Network server
@@ -12,6 +12,7 @@
 - `**rhn_password**`: (required with username) Red Hat Network password
 - `**rhn_org_id**`: (required with activationkey) organization ID to use in conjunction with `rhn_activationkey`
 - `**rhn_activationkey**`: (required with org_id) activation key for use with registration
+- `**rhn_pool_regex**`: (optional) specify a subscription pool name to consume
 
 ### Packaging
 - `**common_base_packages**`: (optional) a list of packages to install on all machines

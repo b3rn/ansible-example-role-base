@@ -3,6 +3,7 @@ rhn_rhsm_base_url: https://cdn.redhat.com
 rhn_server_hostname: subscription.rhn.redhat.com
 rhn_server_insecure: no
 rhn_autosubscribe: yes
+rhn_pool_regex: "^$"
 
 common_base_packages: []
 debian_base_packages: []

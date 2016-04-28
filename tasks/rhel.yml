@@ -17,6 +17,7 @@
     server_hostname: "{{ rhn_server_hostname }}"
     server_insecure: "{{ rhn_server_insecure }}"
     autosubscribe: "{{ rhn_autosubscribe }}"
+    pool: "{{ rhn_pool_regex }}"
     username: "{{ rhn_username }}"
     password: "{{ rhn_password }}"
     state: present
