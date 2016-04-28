@@ -1,23 +1,57 @@
 ---
-- name: Register with RHN
+- name: Grab the Satellite CA certificate
+  get_url:
+    url: http://{{ rhn_hostname }}/pub/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
+    dest: /tmp/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
+  when: is_satellite
+
+- name: Install Satellite CA certificate
+  yum:
+    name: /tmp/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
+    state: present
+  when: is_satellite
+
+- name: Register with RHN (user + pass)
   redhat_subscription:
-    username: "{{ redhat_username }}"
-    password: "{{ redhat_password }}"
-    autosubscribe: yes
+    rhsm_base_url: "{{ rhn_rhsm_base_url }}"
+    server_hostname: "{{ rhn_server_hostname }}"
+    server_insecure: "{{ rhn_server_insecure }}"
+    autosubscribe: "{{ rhn_autosubscribe }}"
+    username: "{{ rhn_username }}"
+    password: "{{ rhn_password }}"
+    state: present
+  when: rhn_username is defined and rhn_password is defined
+
+- name: Register with RHN (activation key)
+  redhat_subscription:
+    rhsm_base_url: "{{ rhn_rhsm_base_url }}"
+    server_hostname: "{{ rhn_server_hostname }}"
+    server_insecure: "{{ rhn_server_insecure }}"
+    autosubscribe: "{{ rhn_autosubscribe }}"
+    org_id: "{{ rhn_org_id }}"
+    activationkey: "{{ rhn_activationkey }}"
+    state: present
+  when: rhn_activationkey is defined
 
 - name: Install EPEL repo
   yum:
-    name: "{{ epel_repo_url }}"
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
     state: present
 
 - name: Import EPEL GPG key
   rpm_key:
-    key: "{{ epel_repo_gpg_key_url }}"
+    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
     state: present
 
-- name: Install base packages (Red Hat)
+- name: Install common base packages (RHEL)
   yum:
     name: "{{ item }}"
     update_cache: yes
     state: present
-  with_items: base_packages
+  with_items: common_base_packages
+
+- name: Install RHEL-specific base packages (RHEL)
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: rhel_base_packages

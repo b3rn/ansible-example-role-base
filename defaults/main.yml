@@ -1,14 +1,10 @@
 ---
-epel_repo_url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
-epel_repo_gpg_key_url: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
+rhn_rhsm_base_url: https://cdn.redhat.com
+rhn_server_hostname: subscription.rhn.redhat.com
+rhn_server_insecure: no
+rhn_autosubscribe: yes
 
-base_packages:
-  - bash
-  - nano
-  - rsync
-  - git
-  - htop
-
-is_debian: ansible_os_family == 'Debian'
-is_redhat: ansible_os_family == 'RedHat'
-is_freebsd: ansible_os_family == 'FreeBSD'
+common_base_packages: []
+debian_base_packages: []
+rhel_base_packages: []
+freebsd_base_packages: []

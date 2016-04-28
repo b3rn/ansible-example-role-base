@@ -1,4 +1,10 @@
 ---
+- set_fact:
+    is_satellite: "{{ rhn_server_hostname != 'subscription.rhn.redhat.com' }}"
+    is_debian: "{{ ansible_os_family == 'Debian' }}"
+    is_redhat: "{{ ansible_os_family == 'RedHat' }}"
+    is_freebsd: "{{ ansible_os_family == 'FreeBSD' }}"
+
 - include: rhel.yml
   when: is_redhat
 

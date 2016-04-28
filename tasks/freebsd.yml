@@ -1,9 +1,12 @@
 ---
-- name: Ensure base packages are installed
+- name: Ensure common base packages are installed (FreeBSD)
   pkgng:
     name: "{{ item }}"
     state: present
-  with_items:
-    - bash
-    - git
-    - htop
+  with_items: common_base_packages
+
+- name: Ensure FreeBSD-specific base packages are installed (FreeBSD)
+  pkgng:
+    name: "{{ item }}"
+    state: present
+  with_items: freebsd_base_packages
