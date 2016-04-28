@@ -1,0 +1,9 @@
+---
+- include: rhel.yml
+  when: is_redhat
+
+- include: debian.yml
+  when: is_debian
+
+- include: freebsd.yml
+  when: is_freebsd

@@ -1,0 +1,23 @@
+---
+- name: Register with RHN
+  redhat_subscription:
+    username: "{{ redhat_username }}"
+    password: "{{ redhat_password }}"
+    autosubscribe: yes
+
+- name: Install EPEL repo
+  yum:
+    name: "{{ epel_repo_url }}"
+    state: present
+
+- name: Import EPEL GPG key
+  rpm_key:
+    key: "{{ epel_repo_gpg_key_url }}"
+    state: present
+
+- name: Install base packages (Red Hat)
+  yum:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items: base_packages
