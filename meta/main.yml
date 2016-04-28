@@ -1,0 +1,23 @@
+---
+dependencies: []
+galaxy_info:
+  author: wtcross
+  description: Example role for applying base configuration across OS families.
+  license: MIT
+  min_ansible_verison: 2.0
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: FreeBSD
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
