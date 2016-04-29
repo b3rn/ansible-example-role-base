@@ -5,6 +5,9 @@ rhn_server_insecure: no
 rhn_autosubscribe: yes
 rhn_pool_regex: "^$"
 
+selinux_mode: permissive
+selinux_type: targeted
+
 common_base_packages: []
 debian_base_packages: []
 rhel_base_packages: []

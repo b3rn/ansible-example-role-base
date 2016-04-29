@@ -56,3 +56,16 @@
     name: "{{ item }}"
     state: present
   with_items: rhel_base_packages
+
+- name: Check if SELinux is present
+  stat:
+    path: /etc/selinux/config
+  register: selinux
+
+- name: Configure SELinux if it is present
+  copy:
+    dest: /etc/selinux/config
+    content: |
+      SELINUX={{ selinux_mode }}
+      SELINUXTYPE={{ selinux_type }}
+  when: selinux.stat.exists
