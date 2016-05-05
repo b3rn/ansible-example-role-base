@@ -13,7 +13,7 @@
 
 - name: Register with RHN (user + pass)
   redhat_subscription:
-    rhsm_base_url: "{{ rhn_rhsm_base_url }}"
+    rhsm_baseurl: "{{ rhn_rhsm_base_url }}"
     server_hostname: "{{ rhn_server_hostname }}"
     server_insecure: "{{ rhn_server_insecure }}"
     autosubscribe: "{{ rhn_autosubscribe }}"
@@ -25,7 +25,7 @@
 
 - name: Register with RHN (activation key)
   redhat_subscription:
-    rhsm_base_url: "{{ rhn_rhsm_base_url }}"
+    rhsm_baseurl: "{{ rhn_rhsm_base_url }}"
     server_hostname: "{{ rhn_server_hostname }}"
     server_insecure: "{{ rhn_server_insecure }}"
     autosubscribe: "{{ rhn_autosubscribe }}"
