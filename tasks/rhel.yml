@@ -1,7 +1,7 @@
 ---
 - name: Grab the Satellite CA certificate
   get_url:
-    url: http://{{ rhn_hostname }}/pub/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
+    url: http://{{ rhn_server_hostname }}/pub/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
     dest: /tmp/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
   when: is_satellite
 
