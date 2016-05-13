@@ -13,3 +13,16 @@
 
 - include: freebsd.yml
   when: is_freebsd
+
+- name: Check if pip is installed
+  shell: which pip
+  register: check_pip
+  changed_when: no
+  failed_when: no
+
+- name: Install Python base packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items: python_packages
+  when: check_pip.rc == 0
