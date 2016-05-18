@@ -14,6 +14,7 @@
 - `**rhn_activationkey**`: (required with org_id) activation key for use with registration
 - `**rhn_pool_regex**`: (optional) specify a subscription pool name to consume
 - `**enable_epel**`: (optional) whether or not to enable EPEL
+- `**enable_optional**`: (optional) whether or not to enable the RHEL optional repo
 
 ### Packaging
 - `**common_base_packages**`: (optional) a list of packages to install on all machines

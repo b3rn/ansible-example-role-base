@@ -5,6 +5,7 @@ rhn_server_insecure: no
 rhn_autosubscribe: yes
 rhn_pool_regex: "^$"
 
+enable_optional: no
 enable_epel: no
 
 selinux_mode: permissive

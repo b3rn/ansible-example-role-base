@@ -3,13 +3,13 @@
   get_url:
     url: http://{{ rhn_server_hostname }}/pub/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
     dest: /tmp/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
-  when: is_satellite
+  when: "{{ is_satellite | bool }}"
 
 - name: Install Satellite CA certificate
   yum:
     name: /tmp/katello-ca-consumer-{{ rhn_server_hostname }}-1.0-1.noarch.rpm
     state: present
-  when: is_satellite
+  when: "{{ is_satellite | bool }}"
 
 - name: Register with RHN (user + pass)
   redhat_subscription:
@@ -38,26 +38,30 @@
   yum:
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
     state: present
-  when: enable_epel
+  when: "{{ enable_epel | bool }}"
 
 - name: Import EPEL GPG key
   rpm_key:
     key: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
     state: present
-  when: enable_epel
+  when: "{{ enable_epel | bool }}"
+
+- name: Enable the optional repo
+  shell: subscription-manager repos --enable=rhel-7-server-optional-rpms
+  when: "{{ enable_optional | bool }}"
 
 - name: Install common base packages (RHEL)
   yum:
     name: "{{ item }}"
     update_cache: yes
     state: present
-  with_items: common_base_packages
+  with_items: "{{ common_base_packages }}"
 
 - name: Install RHEL-specific base packages (RHEL)
   yum:
     name: "{{ item }}"
     state: present
-  with_items: rhel_base_packages
+  with_items: "{{ rhel_base_packages }}"
 
 - name: Check if SELinux is present
   stat:
