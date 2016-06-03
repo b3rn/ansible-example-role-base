@@ -1,5 +1,5 @@
 # ansible-example-role-base
-> A very simple role that handles base configuration across OS families.
+> A very simple role that handles base configuration across various Unix/Linux families.
 
 ## Role Variables
 ### RHN Subscription ([docs](http://docs.ansible.com/ansible/redhat_subscription_module.html))
