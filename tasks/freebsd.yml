@@ -3,10 +3,10 @@
   pkgng:
     name: "{{ item }}"
     state: present
-  with_items: common_base_packages
+  with_items: "{{ common_base_packages }}"
 
 - name: Ensure FreeBSD-specific base packages are installed (FreeBSD)
   pkgng:
     name: "{{ item }}"
     state: present
-  with_items: freebsd_base_packages
+  with_items: "{{ freebsd_base_packages }}"
